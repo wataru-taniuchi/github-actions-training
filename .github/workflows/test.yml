@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,5 +16,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build and Test
-        run: ./gradlew test
+      - name: Dependabot or not
+        run: |
+          if [ "$GITHUB_ACTOR" = "dependabot[bot]" ]; then
+            echo "Dependabot PR detected. Running dependabot-specific test logic."
+            ./gradlew test # ここにdependabot用の処理を追加可能
+          else
+            echo "Normal PR detected. Running standard test logic."
+            ./gradlew test
+          fi
