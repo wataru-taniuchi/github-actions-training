@@ -8,3 +8,8 @@ updates:
     commit-message:
       prefix: "deps"
       include: "scope"
+    groups:
+      gradle-dependencies:
+        patterns:
+          - "*"
+        package-ecosystem: "gradle"
